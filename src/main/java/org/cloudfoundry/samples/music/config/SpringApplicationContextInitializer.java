@@ -54,6 +54,10 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
         for (String persistenceProfile : persistenceProfiles) {
             appEnvironment.addActiveProfile(persistenceProfile);
         }
+        
+        logger.info("********************");
+        logger.info("appEnvironment.getActiveProfiles : " + appEnvironment.getActiveProfiles());
+        logger.info("********************");
     }
 
     public String[] getCloudProfile(Cloud cloud) {
