@@ -9,6 +9,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
+    	System.out.println("!!!!!!! " + Application.class.getName());
         new SpringApplicationBuilder(Application.class).
                 initializers(new SpringApplicationContextInitializer())
                 .application()
