@@ -27,6 +27,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
     private static final List<String> validLocalProfiles = Arrays.asList("mysql", "postgres", "mongodb", "redis");
 
     public static final String IN_MEMORY_PROFILE = "in-memory";
+    public static final String DEFAULT_PROFILE = "mongodb";
 
     static {
         serviceTypeToProfileName.put(MongoServiceInfo.class, "mongodb");
@@ -48,14 +49,14 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
             persistenceProfiles = getActiveProfile(appEnvironment);
         }
         if (persistenceProfiles == null) {
-            persistenceProfiles = new String[] { IN_MEMORY_PROFILE };
+            persistenceProfiles = new String[] { DEFAULT_PROFILE };
         }
 
         for (String persistenceProfile : persistenceProfiles) {
             appEnvironment.addActiveProfile(persistenceProfile);
         }
         
-        logger.info("appEnvironment.getActiveProfiles : " + appEnvironment.getActiveProfiles());
+        logger.info("appEnvironment.getActiveProfiles : " + Arrays.toString(appEnvironment.getActiveProfiles()));
     }
 
     public String[] getCloudProfile(Cloud cloud) {
