@@ -30,10 +30,10 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
     public static final String DEFAULT_PROFILE = IN_MEMORY_PROFILE;
 
     static {
-        serviceTypeToProfileName.put(MongoServiceInfo.class, "mongodb");
+//        serviceTypeToProfileName.put(MongoServiceInfo.class, "mongodb");
 //        serviceTypeToProfileName.put(PostgresqlServiceInfo.class, "postgres");
 //        serviceTypeToProfileName.put(MysqlServiceInfo.class, "mysql");
-//        serviceTypeToProfileName.put(RedisServiceInfo.class, "redis");
+        serviceTypeToProfileName.put(RedisServiceInfo.class, "redis");
 //        serviceTypeToProfileName.put(OracleServiceInfo.class, "oracle");
 //        serviceTypeToProfileName.put(SqlServerServiceInfo.class, "sqlserver");
     }
