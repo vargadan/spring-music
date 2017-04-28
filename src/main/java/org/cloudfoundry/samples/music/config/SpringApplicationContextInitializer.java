@@ -55,9 +55,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
             appEnvironment.addActiveProfile(persistenceProfile);
         }
         
-        System.out.println("********************");
-        System.out.println("appEnvironment.getActiveProfiles : " + appEnvironment.getActiveProfiles());
-        System.out.println("********************");
+        logger.info("appEnvironment.getActiveProfiles : " + appEnvironment.getActiveProfiles());
     }
 
     public String[] getCloudProfile(Cloud cloud) {
@@ -97,6 +95,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
             CloudFactory cloudFactory = new CloudFactory();
             return cloudFactory.getCloud();
         } catch (CloudException ce) {
+        	logger.warn("Cloud not create spring cloud instance", ce);
             return null;
         }
     }
