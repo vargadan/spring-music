@@ -27,15 +27,15 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
     private static final List<String> validLocalProfiles = Arrays.asList("mysql", "postgres", "mongodb", "redis");
 
     public static final String IN_MEMORY_PROFILE = "in-memory";
-    public static final String DEFAULT_PROFILE = "redis";
+    public static final String DEFAULT_PROFILE = IN_MEMORY_PROFILE;
 
     static {
-        serviceTypeToProfileName.put(MongoServiceInfo.class, "mongodb");
-        serviceTypeToProfileName.put(PostgresqlServiceInfo.class, "postgres");
-        serviceTypeToProfileName.put(MysqlServiceInfo.class, "mysql");
+//        serviceTypeToProfileName.put(MongoServiceInfo.class, "mongodb");
+//        serviceTypeToProfileName.put(PostgresqlServiceInfo.class, "postgres");
+//        serviceTypeToProfileName.put(MysqlServiceInfo.class, "mysql");
         serviceTypeToProfileName.put(RedisServiceInfo.class, "redis");
-        serviceTypeToProfileName.put(OracleServiceInfo.class, "oracle");
-        serviceTypeToProfileName.put(SqlServerServiceInfo.class, "sqlserver");
+//        serviceTypeToProfileName.put(OracleServiceInfo.class, "oracle");
+//        serviceTypeToProfileName.put(SqlServerServiceInfo.class, "sqlserver");
     }
 
     @Override
