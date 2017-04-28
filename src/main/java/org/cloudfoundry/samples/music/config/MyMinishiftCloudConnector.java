@@ -8,17 +8,28 @@ import org.springframework.cloud.CloudConnector;
 import org.springframework.cloud.app.ApplicationInstanceInfo;
 import org.springframework.cloud.service.ServiceInfo;
 import org.springframework.cloud.service.common.MongoServiceInfo;
+import org.springframework.cloud.service.common.RedisServiceInfo;
 
 public class MyMinishiftCloudConnector implements CloudConnector{
 	
 	List<ServiceInfo> serviceInfos = new ArrayList<ServiceInfo>();
 	
 	{
-		String host = System.getenv("MONGODB_SERVICE_HOST");
-		String port = System.getenv("MONGODB_SERVICE_PORT");
-		MongoServiceInfo mongoService = new MongoServiceInfo("mongodb", host, Integer.parseInt(port), "userJ28", "IEwaAEMIR6goS63o", "spring-music");
-		serviceInfos.add(mongoService);
+		{
+			String host = System.getenv("MONGODB_SERVICE_HOST");
+			String port = System.getenv("MONGODB_SERVICE_PORT");
+			MongoServiceInfo service = new MongoServiceInfo("mongodb", host, Integer.parseInt(port), "userJ28", "IEwaAEMIR6goS63o", "spring-music");
+			serviceInfos.add(service);
+		}
+		
+		{
+			String host = System.getenv("REDIS_SERVICE_HOST");
+			String port = System.getenv("REDIS_SERVICE_PORT");
+			RedisServiceInfo service = new RedisServiceInfo("redis", host, Integer.parseInt(port), null);
+			serviceInfos.add(service);	
+		}
 	}
+	
 	
 	ApplicationInstanceInfo appInfo = new ApplicationInstanceInfo() {
 

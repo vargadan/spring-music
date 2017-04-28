@@ -27,7 +27,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
     private static final List<String> validLocalProfiles = Arrays.asList("mysql", "postgres", "mongodb", "redis");
 
     public static final String IN_MEMORY_PROFILE = "in-memory";
-    public static final String DEFAULT_PROFILE = "mongodb";
+    public static final String DEFAULT_PROFILE = "redis";
 
     static {
         serviceTypeToProfileName.put(MongoServiceInfo.class, "mongodb");
