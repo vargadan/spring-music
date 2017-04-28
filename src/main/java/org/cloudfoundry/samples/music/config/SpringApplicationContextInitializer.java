@@ -94,6 +94,7 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
     private Cloud getCloud() {
         try {
             CloudFactory cloudFactory = new CloudFactory();
+            cloudFactory.registerCloudConnector(new MyMinishiftCloudConnector());
             return cloudFactory.getCloud();
         } catch (CloudException ce) {
         	logger.warn("Cloud not create spring cloud instance", ce);
