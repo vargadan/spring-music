@@ -1,5 +1,8 @@
 package org.cloudfoundry.samples.music.config;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +11,6 @@ import org.springframework.cloud.CloudConnector;
 import org.springframework.cloud.app.ApplicationInstanceInfo;
 import org.springframework.cloud.service.ServiceInfo;
 import org.springframework.cloud.service.common.MongoServiceInfo;
-import org.springframework.cloud.service.common.RedisServiceInfo;
 
 public class MyMinishiftCloudConnector implements CloudConnector{
 	
@@ -18,7 +20,9 @@ public class MyMinishiftCloudConnector implements CloudConnector{
 		{
 			String host = System.getenv("MONGODB_SERVICE_HOST");
 			String port = System.getenv("MONGODB_SERVICE_PORT");
-			MongoServiceInfo service = new MongoServiceInfo("mongodb", host, Integer.parseInt(port), "userJ28", "IEwaAEMIR6goS63o", "spring-music");
+			String username = readSecretFile("/secret/mongodb/database-user");
+			String password = readSecretFile("/secret/mongodb/database-password");
+			MongoServiceInfo service = new MongoServiceInfo("mongodb", host, Integer.parseInt(port), username, password, "spring-music");
 			serviceInfos.add(service);
 		}
 		
@@ -40,7 +44,7 @@ public class MyMinishiftCloudConnector implements CloudConnector{
 
 		@Override
 		public String getAppId() {
-			return "spring-music";
+			return System.getenv("OPENSHIFT_BUILD_NAMESPACE");
 		}
 
 		@Override
@@ -64,6 +68,21 @@ public class MyMinishiftCloudConnector implements CloudConnector{
 	@Override
 	public List<ServiceInfo> getServiceInfos() {
 		return serviceInfos;
+	}
+	
+	String readSecretFile(String path) {
+		String secret = null;
+		try(FileInputStream fis = new FileInputStream(path)) {
+			int size = fis.available();
+			byte[] bytes = new byte[size];
+			fis.read(bytes);
+			secret = new String(bytes);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return secret;
 	}
 
 }
