@@ -22,12 +22,12 @@ public class MyMinishiftCloudConnector implements CloudConnector{
 			serviceInfos.add(service);
 		}
 		
-		{
-			String host = System.getenv("REDIS_SERVICE_HOST");
-			String port = System.getenv("REDIS_SERVICE_PORT");
-			RedisServiceInfo service = new RedisServiceInfo("redis", host, Integer.parseInt(port), null);
-			serviceInfos.add(service);	
-		}
+//		{
+//			String host = System.getenv("REDIS_SERVICE_HOST");
+//			String port = System.getenv("REDIS_SERVICE_PORT");
+//			RedisServiceInfo service = new RedisServiceInfo("redis", host, Integer.parseInt(port), null);
+//			serviceInfos.add(service);	
+//		}
 	}
 	
 	
